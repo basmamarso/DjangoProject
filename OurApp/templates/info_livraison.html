@@ -1,0 +1,106 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Inscription
+{% endblock %}
+
+
+{% block content %}
+<style>
+   .box{  
+    background-color:  #ffffff;
+    display: block;
+    margin-left: auto;
+     margin-right: auto;
+    width: 55%;
+    padding: 50px;
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+
+
+   }
+/* Full-width input fields */
+.my-input {
+  width: 100%;
+  padding: 12px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.my-input:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #B99470;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border:
+        rgb(220, 193, 74)
+        solid 1px;
+       
+
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+</style>
+  <!-- start -->
+  {% if messages %}
+  {% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  {% endfor %}
+{% endif %}
+  <form method="POST" action="{% url 'info_livraison' %}">
+    {% csrf_token %}
+
+    <div class="box">
+
+      <h1>Les information de la livraison</h1>
+      <p>Veuillez remplir ce formulaire .</p>
+      <hr>
+      {{ form.as_p }}
+     
+      <hr>
+  
+      <button type="submit" class="registerbtn">Passer au Paiment</button>
+    </div>
+
+  </form>
+
+  <!-- end -->
+
+{% endblock %}

@@ -1,0 +1,531 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Accueil
+{% endblock %}
+
+
+{% block content %}
+<style>
+
+
+.sec{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 70px;
+}
+.sec .side-bar{
+    width: 25%;
+    background-color: #fff;
+    border-radius: 20px;
+    border:
+    rgb(220, 193, 74)
+    solid 1px;
+}
+.sec .content{
+    width: 72%;
+    background-color: #fff;
+    border-radius: 20px;
+    border:
+    rgb(220, 193, 74)
+    solid 1px;
+}
+
+
+.titile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9eaf0;
+}
+.titile h6{
+    text-transform: uppercase;
+    padding: 10px 20px;
+}
+.titile a{
+    margin-right: 20px;
+    color:rgb(220, 193, 74);
+    font-weight: bold;
+    text-decoration: none;
+}
+.titile a:hover{
+    text-decoration: underline;
+}
+
+.all-items{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.all-items .item{
+    width: 22%;
+}
+.item .div-img{
+    border-bottom: 2px solid #e9eaf0;
+}
+.item .div-img img{
+    width: 100%;
+}
+.item .div-text h6{
+    margin: 10px 0 0 0;
+}
+
+.item .div-text p{
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.item .div-text .stars i{
+    color: #B99470;
+}
+.item .div-text .price{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.item .div-text .price span{
+    color: #e80030;
+    cursor: pointer;
+    font-weight: bold;
+}
+.item .div-text .price del{
+    text-decoration: line-through;
+    font-style: italic;
+    color: #999;
+}
+
+
+
+
+
+
+/* sec -2 */
+
+.sec-2 .side-bar .item{
+    padding: 10px;
+}
+.sec-2 .side-bar .item .div-text h6{
+    margin-bottom: 5px;
+}
+
+/* sec-3 */
+.sec-3{
+    align-items: flex-start;
+}
+.sec-3 .side-bar .boxs{
+    padding: 15px 20px;
+}
+.sec-3 .side-bar .boxs .box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e9eaf0;
+}
+.sec-3 .side-bar .boxs .box img{
+    width: 100px;
+}
+
+.sec-3 .side-bar .boxs .box .div-text .stars{
+    margin: 15px 0 13px;
+}
+.sec-3 .side-bar .boxs .box .div-text .stars i{
+    color: #B99470;
+}
+.sec-3 .side-bar .boxs .box .div-text span{
+    color: #e80030;
+    font-weight: bold;
+}
+
+
+.sec-3 .content .bg-sec{
+    height: 290px;
+    background-image: url("{% static 'images/macaron-haiti-septembre-2023-desktop-888x502.jpg' %}");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border:
+    rgb(220, 193, 74)
+    solid 1px;
+}
+.sec-3 .content .bg-sec .div-text h1{
+    color: #fff;
+    text-transform: uppercase;
+    margin: 15px 0;
+    font-size: 35px;
+}
+.sec-3 .content .bg-sec .div-text p{
+    color: #e9eaf0;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+.sec-3 .all-items{
+    background-color: #fff;
+    border-radius: 10px;
+}
+.div-text a{text-decoration: none;}
+
+
+.div-text .h-6{
+  font-size:14px;
+}
+.big-name{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    font-size: 50px;
+    letter-spacing: 20px;
+    padding-left: 150px;
+    padding-bottom: 200px;
+    padding-top: 150px;
+
+}
+
+</style>
+  <!-- Carousel -->
+  <div class="container-fluid">
+
+<div class="big-name">
+    LA GALERIE DE CHOCOLAT
+
+</div>
+
+
+<br><br><br>
+<section class="sec-2 sec">
+  <div class="side-bar">
+
+      <div class="titile">
+          <h6>hot deals</h6>
+          <a href="#">More</a>
+      </div>
+
+      <div class="item">
+          <div class="div-img">
+              <img src="{% static 'images/001.jpg' %}" alt="">
+          </div>
+
+          <div class="div-text">
+              <h6>Coupe Dattes Prestiges pour fiançailles</h6>
+
+              <div class="stars">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-regular fa-star-half-stroke"></i>
+
+              </div>
+              <div class="price">
+                  <span>115 MAD</span>
+                  <del>160 MAD</del>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+  <div class="content">
+      <div class="titile">
+          <h6>new products deals</h6>
+          <a href="#">More</a>
+      </div>
+
+      <div class="all-items">
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/01.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>Coffret Maison Noir et Lait 60 chocolats</h6>
+
+                  <p>Coffret de chocolat emblématique offrant une sélection de 60 ganaches et pralinés, en assortiment noir et lait. A offrir ou à s’offrir, laissez-vous surprendre par les subtilités du goût Maison du Chocolat </p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/04.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>Coffret Truffes Chocolat Nature 400g</h6>
+
+                  <p>Un coffret de délicates truffes de ganache au chocolat moussée à la texture aérienne, enrobées d’une couverture de chocolat craquante et de poudre de cacao.</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/03.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>Coffret Gourmandises 20 chocolats</h6>
+
+                  <p>Quatre recettes de pralinés moussés à découvrir dans un coffret ensoleillé, du praliné noir croquant jusqu’au praliné lait coco en passant par praliné lait pécan </p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/02.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>Coffret Pralinés 40 chocolats</h6>
+
+                  <p>Le praliné est un de nos best-sellers, son goût et sa texture séduisent toujours plus de gourmands. C’est pourquoi La Maison a décidé de le mettre à l’honneur à travers différents coffrets.</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="sec-3 sec">
+  <div class="side-bar">
+      <div class="titile">
+          <h6>new offer</h6>
+          <a href="#">More</a>
+      </div>
+
+      <div class="boxs">
+          <div class="box">
+              <img src="{% static 'images/C.webp' %}" alt="">
+              <div class="div-text">
+                  <p class="h-6">BOITE MACAO 60 CARRÉS GRANDS CRUS</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <span>139 MAD</span>
+              </div>
+          </div>
+
+          <div class="box">
+              <img src="{% static 'images/B.webp' %}" alt="">
+              <div class="div-text">
+                  <p class="h-6">BOITE MACAO 60 CARRÉS DÉGUSTATION</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <span>139 MAD</span>
+              </div>
+          </div>
+
+          <div class="box">
+              <img src="{% static 'images/A.webp' %}" alt="">
+              <div class="div-text">
+                  <p class="h-6">BOITE CARRÉE 48 CHOCOLATS ASSORTIS</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <span>139 MAD</span>
+              </div>
+          </div>
+
+          <div class="box">
+              <img src="{% static 'images/D.webp' %}" alt="">
+              <div class="div-text">
+                  <p class="h-6">BOITE AMANDE CHOCO FRAMBOISE, CHOCOLAT NOIR ET LAIT - 240 G</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <span>139 MAD</span>
+              </div>
+          </div>
+          
+          <!-- 4times -->
+      </div>
+  </div>
+
+  <div class="content">
+      <div class="bg-sec">
+          <div class="div-text">
+        
+          </div>
+      </div>
+
+      <div class="all-items">
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/E.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>3 BOMBES COEUR DE CHOCOLAT LAIT CARAMEL </h6>
+
+                  <p>Une explosion de saveurs qui vous garantira un chocolat chaud surprenant. Les petites guimauves apporteront plus de texture et d'onctuosité à cette succulente boisson chaude</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/F.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>3 BOMBES COEUR DE CHOCOLAT NOIR </h6>
+
+                  <p>Une explosion de saveurs qui vous garantira un chocolat chaud surprenant. Les petites guimauves apporteront plus de texture et d'onctuosité à cette succulente boisson chaude.</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/H.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>CUBE 16 OURS GUIMAUVE CHOCOLAT AU LAIT ET FRAISE</h6>
+
+                  <p>Vous allez craquer pour cette recette ! Un cœur de guimauve accompagné de sa gelée de fraise, enrobé de chocolat au lait.</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="item">
+              <div class="div-img">
+                  <img src="{% static 'images/J.webp' %}" alt="">
+              </div>
+
+              <div class="div-text">
+                  <h6>CUBE 16 OURS EN GUIMAUVE CHOCOLAT AU LAIT ET ABRICOT</h6>
+
+                  <p>Des ours en guimauve 2 fois plus gourmands ! Redécouvrez les saveurs de votre enfance avec un ours en guimauve au cœur de gelée</p>
+                  <div class="stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-regular fa-star-half-stroke"></i>
+
+                  </div>
+                  <div class="price">
+                      <span>120 MAD</span>
+                      <del>140 MAD</del>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

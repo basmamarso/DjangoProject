@@ -1,0 +1,136 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Plus
+{% endblock %}
+
+
+{% block content %}
+<style>
+   .box{  
+    /* background-color:  #ffffff; */
+    display: block;
+    margin-left: auto;
+     margin-right: auto;
+    width: 85%;
+    padding: 40px;
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+
+   }
+   .big-image{
+    width:100%;
+    height:450px;
+  
+   }
+   .small-image{
+    margin: 5px;
+    max-width: 80px; 
+   }
+   .small-image:hover{
+    border:#e2e5e8 solid 2px;
+    border-radius: 5px;
+    padding: 5px;
+   }
+   .ctr{
+    text-align: center;
+
+   }
+   .but{
+    width: 100%;
+    
+        padding: 12px ;
+        text-align: center;
+        background-color: #B99470;
+        border-style: none;
+        border-radius: 4px;
+        color: #fff;
+        font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        border: none;
+        
+         
+
+
+    }
+
+
+    .but:hover{
+        background-color: #846241 ;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+    .desc{
+      color: #999;
+    font-size: 18px;
+    margin-bottom: 5px;
+    }
+    .quantite {
+  
+    width: 90%; /* Adjust width as needed */
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+    border-radius: 5px;
+    padding: 12px ;
+   }
+
+   p{font-size: 20px;}
+
+</style>
+<script>
+    function changeBigImage(source) {
+      document.getElementById('bigImage').src = source;
+    }
+ 
+  </script>
+  <!-- start -->
+
+    <div class="box">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 ctr">
+                    {% if produit.image_set.all %}
+                    <img src="{{ produit.image_set.first.imageURL }}" alt="{{ produit.libelle }} Image" id="bigImage" alt="big" class="big-image">
+                {% else %}
+                    <p>No image available for {{ produit.libelle }}</p>
+                {% endif %}       
+                {% for image in produit.image_set.all %}
+                    {% if image.image %}
+                      <img src="{{ image.imageURL }}" alt="{{ produit.libelle }} Image" class="small-image" onclick="changeBigImage('{{  image.imageURL  }}')"/>
+                    {% else %}
+                       <p>No image available</p>
+                {% endif %}
+            {% endfor %}                
+              </div>
+            <div class="col-lg-6 col-sm-12 p-5">
+                <h1>{{produit.libelle}}</h1>
+                <p class="desc">{{produit.description}}</p>
+                <p>{{produit.poids}} g</p>
+                <p>quantite restant :{{produit.quantite_stock}}</p>
+                {% if produit.solde %}
+                <p>
+                    <span>{{produit.prix_sold}} MAD</span>
+                    <span style="color: red; text-decoration: line-through;margin-left: 50px;font-size: 25px;">{{produit.prix}} MAD</span>
+
+                </p>
+            {% else %}
+                <p>{{produit.prix}} MAD</p>
+            {% endif %}
+                <form>
+                <input type="number" min="1" max="{{produit.quantite_stock}}" id="quantite" class="quantite" value="1">
+                <br><br>
+                <button data-product="{{produit.id}}"  data-action="add" class="but update-cart">Ajouter au panier  <i class="fa-solid fa-bag-shopping"></i></button>
+              </form>
+              </div>
+        </div>
+     
+    </div>
+
+
+  <!-- end -->
+
+{% endblock %}

@@ -1,0 +1,192 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Panier
+{% endblock %}
+
+
+{% block content %}
+<style>
+       .box{  
+    background-color:  #ffffff;
+    display: block;
+    margin-left: auto;
+     margin-right: auto;
+    width: 85%;
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+    border-radius: 15px;
+
+
+   }
+   .image{width: 100px;}
+   .but{
+        margin: 7px;
+        padding: 6px 10px 6px 10px;
+        text-align: center;
+        background-color: #B99470;
+        border-style: none;
+        border-radius: 4px;
+        color: #fff;
+        font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        border: #B99470 solid 3px;
+    }
+    .but:hover{
+        border: #846241 solid 3px;
+        background-color: #846241;
+        
+    
+    }
+    .quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+	
+
+}
+
+.chg-quantity{
+	width: 14px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+.chg-quantity:hover{
+	opacity: .6;
+    width: 16px;
+}
+.br{
+    border: solid #DCC14A 1px;
+    margin: auto;
+    padding: 20px;
+}
+.cont-but{
+        text-decoration: none;
+        width: 50%;
+        padding: 15px 80px 15px 80px;
+        text-align: center;
+        background-color: #B99470;
+        border-style: none;
+        border-radius: 4px;
+        color: #fff;
+        font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        border: #B99470 solid 3px;
+}
+.cont-but:hover{
+    border: #846241 solid 3px;
+        background-color: #846241;
+        
+}
+
+
+</style>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+
+
+<div class="box">
+    <div class="row m-auto p-1">
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+          Image
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+           Libelle
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+          Prix
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+            Prix x Quantite
+        </div>
+        <div class="col-lg-1 col-sm-12 text-center m-auto"> 
+            Quantite
+        </div>
+        <div class="col-lg-1 col-sm-12 text-center m-auto">
+            Supprimer
+        </div>
+    </div>
+
+</div>
+<br>
+
+{% if produits_c %}
+{% for prod in produits_c %}
+<div class="box">
+
+    <div class="row m-auto p-1">
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+            {% if prod.produits.image_set.all %}
+            <img src="{{ prod.produits.image_set.first.imageURL }}" alt="{{ prod.produits.libelle }} Image" class="image">
+        {% else %}
+            <p>No image available for {{ prod.produits.libelle }}</p>
+        {% endif %}  
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+            <p>{{prod.produits.libelle}}</p>
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+            {% if prod.produits.solde %}
+            <p>{{prod.produits.prix_sold}} MAD</p>
+            {% else %}
+            <p>{{prod.produits.prix}} MAD</p>
+            {% endif %} 
+        </div>
+        <div class="col-lg-2 col-sm-12 text-center m-auto"> 
+            <p>{{prod.get_total}} MAD</p>
+        </div>
+        <div class="col-lg-1 col-sm-12 text-center m-auto"> 
+            <form>
+            <p class="quantity">{{prod.quantite}}</p>
+						<div class="quantity">
+							<img data-product="{{prod.produits.id}}" data-action="add-one" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+					
+							<img data-product="{{prod.produits.id}}" data-action="remove-one" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+						</div>
+        </div>
+        <div class="col-lg-1 col-sm-12 text-center m-auto">
+            <button data-product="{{prod.produits.id}}"  data-action="remove" class="but update-cart"><i class="fa-solid fa-x"></i></button>
+        </form>
+        </div>
+    </div>
+ 
+</div>
+<br>
+{% endfor %}
+<br>
+<div class="box">
+    <div class="row m-auto p-1">
+        <div class="col-5 m-auto">
+            total:     {{commande.get_total_panier}} MAD
+        </div>
+        <div class="col-5 m-auto">
+            nombre de produits total :    {{commande.get_nb_produits}}
+        </div>
+    </div>
+</div>
+<br><br><br>
+<center><a href="/info_livraison" class="cont-but">Continue</a></center>
+<br>
+{% else %}
+<p class="mx-5">vous n'avez rien ajouter a votre panier</p>
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

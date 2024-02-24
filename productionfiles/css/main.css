@@ -1,0 +1,7 @@
+.logo{max-width:150px}
+.navitems{color: blue;}
+
+.navitems:hover{color: #B99470;
+border-bottom: #B99470 2px solid;
+background-color: aliceblue;}
+body{background-color: blue;}

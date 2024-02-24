@@ -1,0 +1,145 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+  Inscription
+{% endblock %}
+
+
+{% block content %}
+<style>
+   .box{  
+    background-color:  #ffffff;
+    display: block;
+    margin-left: auto;
+     margin-right: auto;
+    width: 55%;
+    padding: 50px;
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 15px;
+
+   }
+/* Full-width input fields */
+.my-input {
+  width: 100%;
+  padding: 12px;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.my-input:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #B99470;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+
+</style>
+  <!-- start -->
+  {% if messages %}
+  {% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  {% endfor %}
+{% endif %}
+
+    <div class="box">
+
+      <h1>Paiment</h1>
+      <p>Veuillez Choisir votre mode de paiment</p>
+      <hr>
+      <div id="paypal-button-container"></div>
+      <hr>
+      <p>En passant le paiment, vous acceptez nos <a href="#">Conditions et confidentialité</a>.</p>
+ 
+    </div>
+
+
+
+  <!-- end -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AXc4fa6DbxdGms1UZ-2Vgob9ER4OYp2DyJAu8mvZlMfWD-bLft074LW-9vWeLquQtHAr8SWbIjpAYUma&currency=USD"></script>
+
+  <script>
+      var total = '{{commande.get_total_panier}}'
+      // Render the PayPal button into #paypal-button-container
+      paypal.Buttons({
+
+          // Set up the transaction
+          createOrder: function(data, actions) {
+              return actions.order.create({
+                  purchase_units: [{
+                      amount: {
+                          value:parseFloat(total).toFixed(2)
+                      }
+                  }]
+              });
+          },
+
+          // Finalize the transaction
+          onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                  // Show a success message to the buyer
+                  submitPaiment()
+              });
+          }
+
+      }).render('#paypal-button-container');
+  </script>
+  <script>
+    function submitPaiment(){
+        fetch('/paiment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken 
+            },
+            body: JSON.stringify({
+                'command_id': '{{commande.id}}',
+                'total': '{{commande.get_total_panier}}'
+            })
+        }).then(response => response.json())
+          .then(data => {
+                console.log(data)
+                  window.location.href = '/';
+           
+          });
+    }
+  </script>
+
+{% endblock %}

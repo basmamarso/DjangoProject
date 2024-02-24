@@ -1,0 +1,110 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+{{categorie}}
+{% endblock %}
+
+
+{% block content %}
+<style>
+    .cards{
+        width: 95%;
+        background-color: #ffffff;
+        height: 350px;;
+        border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+
+    }
+    .cards:hover{
+        width: 100%;
+        height: 360px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
+}
+
+    .product-image{
+        width: 100%;
+        height: 70%;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px; 
+    }
+    
+    .text-part{
+        text-align:center;
+      
+     
+    }
+    a{text-decoration: none;}
+    .but{
+        margin: 7px;
+        padding: 6px 10px 6px 10px;
+        text-align: center;
+        background-color: #B99470;
+        border-style: none;
+        border-radius: 4px;
+        color: #fff;
+        font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        border:
+        rgb(220, 193, 74)
+        solid 1px;
+        
+    }
+
+
+
+
+
+
+    .but:hover{
+        padding: 8px 25px 8px 25px;
+    }
+
+
+
+</style>
+  <!-- start -->
+  <div class="container m-5">
+    <div class="row">
+        {% if produits %}
+        {% for produit in produits %}
+        <div class="col-3">
+            <div class="cards">
+                <a href="{% url 'detail_product' produit.id %}">
+                    {% if produit.image_set.all %}
+                    <img src="{{ produit.image_set.first.imageURL }}" alt="{{ produit.libelle }} Image" class="product-image">
+                {% else %}
+                    <p>No image available for {{ produit.libelle }}</p>
+                {% endif %}                  
+                <div class="text-part">
+                    <h4 style="color: #000000;">{{produit.libelle}}</h4>
+                    {% if produit.solde %}
+                    <p style="color: #000000;">
+                        <small style="color:red;text-decoration:line-through;font-size: small">{{produit.prix}}MAD</small>
+                        {{produit.prix_sold}} MAD</p>
+                    {% else %}
+                    <p style="color: #000000">{{produit.prix}} MAD</p>
+                    {% endif %}   
+                    
+                </a>
+                <button  data-product="{{produit.id}}" data-action="add" class="but update-cart">Ajouter au panier  <i class="fa-solid fa-bag-shopping"></i></button>
+
+                </div>
+            </div> 
+        </div>
+         {% endfor %}
+         {% else %}
+         <p>aucun produit dans cette categorie</p>
+         {% endif %}  
+        
+         
+    </div>
+  </div>
+  <!-- end -->
+
+{% endblock %}

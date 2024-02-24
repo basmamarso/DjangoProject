@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
+  <title>{% block title %}{% endblock %}</title>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  .logo{max-width:110px}
+.navitems{
+  color: black;
+}
+.navitems:hover{color: #B99470;
+border-bottom: #B99470 3px solid;
+}
+#cart-total{
+
+	color:#ffffff;
+	background-color:#B99470;
+  padding:3px;
+	font-size:10px;
+  border-radius: 50%;
+}
+video {
+
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      z-index: -1;
+    }
+
+
+    /* Optional: Add content on top of the video */
+
+</style>
+<script type="text/javascript">
+  var user = '{{request.user}}'
+
+  function getToken(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  var csrftoken = getToken('csrftoken')
+
+
+
+</script>
+</head>
+<body class="bg-light">
+  {% if messages %}
+  {% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  {% endfor %}
+{% endif %}
+  {% if request.path == '/' %}
+  <video class="video-bg" autoplay muted loop  >
+    <source src="{% static 'images/vdch.mp4' %}" type="video/mp4">
+  </video>
+
+  {% endif %}
+
+ <!-- start navbar -->
+
+ <div class="container" >
+  <nav class="navbar navbar-expand-lg navbar-light  "  id="headerNav">
+    <div class="container-fluid">
+      <a class="navbar-brand d-block d-lg-none" href="#">
+        <img src="{% static 'images/logo.png' %}" height="80" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link navitems mx-2 " aria-current="page" href="/"><i class="fa-solid fa-house"></i> Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navitems mx-2" href="/products">Produits</a>
+          </li>
+          <li class="nav-item d-none d-lg-block mx-5">
+            <a class="nav-link mx-2" href="#">
+              <img src="{% static 'images/logo.png' %}" class="logo" />
+            </a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link  navitems mx-2" href="/panier" >Panier <i class="fa-solid fa-bag-shopping"></i>	<sup id="cart-total">{{commande.get_nb_produits}}</sup></a>
+          </li>
+          <li class="nav-item dropdown dropend">
+            <a class="nav-link dropdown-toggle navitems" data-bs-toggle="dropdown" href="#"> {{user.username}} <i class="fa-solid fa-user"></i></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/profil" >Voir Profil</a></li>
+              <li><a class="dropdown-item" href="/commandes">Voir Commandes</a></li>
+              <li><a class="dropdown-item" href="{% url 'sedeconnecter' %}">Se deconnecter <i class="fa-solid fa-right-from-bracket"></i></a></li>
+     
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link navitems mx-2" href="/sinscrire">S'inscrire <i class="fa-solid fa-user-plus"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  navitems mx-2" href="/seconnecter">Se connecter <i class="fa-solid fa-right-to-bracket"></i></a>
+          </li>
+        
+          {% endif %}
+          
+          
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top "  id="headerNav">
+    <div class="container-fluid">
+ 
+  
+      <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link navitems mx-5 " aria-current="page" href="/categorie/Chocolat-noir">Chocolat noir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navitems mx-5" href="/categorie/Chocolat-blanc">Chocolat blanc</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link navitems mx-5" href="/categorie/Chocolat-au-lait">Chocolat au lait </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link navitems mx-5" href="/categorie/Chocolat-ruby">Chocolat ruby</a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link navitems mx-5" href="/categorie/Chocolat-praliné ">Chocolat praliné </a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+ </div>
+  <hr class="m-5" />
+
+
+ <!-- end navbar -->
+{% block content %}
+{% endblock %}
+ <!-- start footer -->
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<hr class="m-5" />
+
+  <!-- Footer -->
+  <footer class="text-center text-light" style="background-color: #B99470;">
+    <!-- Grid container -->
+    <div class="container-fluid">
+      <!-- Section: Links -->
+      <section class="mt-4">
+        <!-- Grid row-->
+        <div class="row text-center d-flex justify-content-center pt-5">
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-light">Privacy Policy</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+     
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-light">Warranty & return</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-light">Shipping Policy</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-light">terms & Conditions</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="#!" class="text-light">Help</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row-->
+      </section>
+      <!-- Section: Links -->
+
+      <hr class="my-3" />
+
+      <!-- Section: Text -->
+      <section class="mb-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+              distinctio earum repellat quaerat voluptatibus placeat nam,
+              commodi optio pariatur est quia magnam eum harum corrupti
+              dicta, aliquam sequi voluptate quas.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Text -->
+
+      <!-- Section: Social -->
+      <section class="text-center mb-5">
+        <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      <!-- Github -->
+      <a class="btn btn-outline-warning btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+      </section>
+      <!-- Section: Social -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div
+         class="text-center p-3"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2024 Copyright: Developed by Basma & Ouahiba & Aya & Khaoula
+      
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div> 
+  <!-- Footer -->
+
+<!-- End of .container -->
+
+  <!-- end footer -->
+
+	<script type="text/javascript" src="{% static 'js/panier.js' %}"></script>
+
+</body>
+</html>

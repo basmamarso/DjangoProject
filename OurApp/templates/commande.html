@@ -1,0 +1,70 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+{{categorie}}
+{% endblock %}
+
+
+{% block content %}
+<style>   .box{  
+    /* background-color:  #ffffff; */
+    display: block;
+    margin-left: auto;
+     margin-right: auto;
+    width: 95%;
+    padding: 40px;
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+
+   }
+   th{
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+        padding: 20px 100px;
+        
+   }
+   td{
+    border:
+        rgb(220, 193, 74)
+        solid 1px;
+        border-radius: 20px;
+        padding: 15px 150px;
+   }
+   </style>
+
+<div class="container mt-3">
+         
+    <table class="box">
+      <thead>
+        <tr>
+          <th>N° commande</th>
+          <th>Date de commande</th>
+          <th>Etat de livraison</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% if commandes %}
+        {% for c in commandes %}
+        <tr>
+          <td>{{c.id}} </td>
+          <td> {{c.date_commander}} </td>
+          <td>{{c.etatLivraison}}</td>
+      
+        </tr>
+        {% endfor %}
+        {% else %}
+        <p>pas de commande</p>
+        {% endif %}  
+      </tbody>
+    </table>
+  </div>
+
+</script>
+
+{% endblock %}
